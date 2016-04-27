@@ -23,7 +23,7 @@ class DeleteCloudFormation(object):
         for stack in stacks_name:
             if stack not in stacks_not_die:
                 try:
-                   # self.connection_cloudformation.delete_stack(stack)
+                   self.connection_cloudformation.delete_stack(stack)
                 except Exception,e:
                         print "Oops!  The stack have problem for die.  Try again..."
                         print e
