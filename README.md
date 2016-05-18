@@ -1,2 +1,2 @@
-# MrCleaner (In progress)
-Tool for delete cloudFormations... if it is not in the dustlist
+# Wall-e(In progress)
+Tool for delete AWS objects... if it is not in the dustlist
