@@ -22,7 +22,8 @@ class CleanerCloudFormation(object):
         for stack in stacks_name:
             if stack not in cf_dust_not_clean:
                 try:
-                    self.connection_cloudformation.delete_stack(stack)
+                    print stack
+                    #self.connection_cloudformation.delete_stack(stack)
                 except Exception, err:
                         print "Oops!  The stack have problem for die.  Try again..."
                         print err
