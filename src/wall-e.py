@@ -1,8 +1,7 @@
 #!/usr/bin/python
-
+import argparse
 from clean_cloudformation import CleanerCloudFormation
 from boto_connections import BotoConnections
-import sys
 import logging
 
 LOG_FILENAME = "logs/wall-e.log"
@@ -10,8 +9,8 @@ logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG)
 
 
 class WalleConfiguration(object):
-    def __init__(self, resource, profile):
-        self.connection = BotoConnections().get_resource_connection_to_aws(resource, profile)
+    def __init__(self, resource, account_name):
+        self.connection = BotoConnections().get_resource_connection_to_aws(resource, account_name)
         self.cformation = CleanerCloudFormation(self.connection)
         self.cloudformation_dust_file = open("dust/cloudformation_dust").read().splitlines()
 
@@ -22,8 +21,11 @@ class WalleConfiguration(object):
         self.cformation.cleaner_stacks(cloudformations_dust)
 
 if __name__ == '__main__':
-    args = str(sys.argv)
-    profile = str(sys.argv[1])
-    resource = str(sys.argv[2])
-    walle = WalleConfiguration(resource, profile)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
+    parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
+    args = parser.parse_args()
+    resource = args.resource
+    account_name = args.aws_account
+    walle = WalleConfiguration(resource, account_name)
     walle.clean_cloudformation()
