@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import time
 
 
 class CleanerCloudFormation(object):
@@ -14,6 +15,7 @@ class CleanerCloudFormation(object):
         object_stack = self.get_all_stacks()
         stacks_name = list()
         for stack in object_stack:
+            time.sleep(5)
             stacks_name.append(stack.stack_name)
         return stacks_name
 
@@ -23,9 +25,9 @@ class CleanerCloudFormation(object):
             if stack not in cf_dust_not_clean:
                 try:
                     self.connection_cloudformation.delete_stack(stack)
-                except Exception, err:
-                        print "Oops!  The stack have problem for die.  Try again..."
-                        print err
+                except Exception as err:
+                        print ("Oops!  The stack have problem for die.  Try again...")
+                        print (err)
 
 
 
