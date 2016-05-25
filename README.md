@@ -13,7 +13,7 @@ aws_secret_access_key = ****************************************
 ```
 and launch:
 ```
-python "aws-name" "cloudformation"
+python -a aws-name -r cloudformation -d dust/cloudformation_dust
 ```
 This command will clean all cloudformations if there are not in "dust/cloudformation_dust"
 
