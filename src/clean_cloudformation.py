@@ -1,5 +1,8 @@
 #!/usr/bin/python
 import time
+import logging
+
+logger = logging.getLogger('wall_e')
 
 
 class CleanerCloudFormation(object):
@@ -8,14 +11,13 @@ class CleanerCloudFormation(object):
         self.connection_cloudformation = connection_cloudformation
 
     def get_all_stacks(self):
-        list_stacks = self.connection_cloudformation.stacks.all()
-        return list_stacks
+        return self.connection_cloudformation.stacks.all()
 
     def get_stacks_names(self):
         object_stack = self.get_all_stacks()
         stacks_name = list()
         for stack in object_stack:
-            time.sleep(5)
+            time.sleep(3)
             stacks_name.append(stack.stack_name)
         return stacks_name
 
@@ -24,9 +26,10 @@ class CleanerCloudFormation(object):
         for stack in stacks_name:
             if stack not in cf_dust_not_clean:
                 try:
-                    self.connection_cloudformation.delete_stack(stack)
+                    logger.info('throw trash... {}'.format(stack))
+                    #self.connection_cloudformation.delete_stack(stack)
                 except Exception as err:
-                        print ("Oops!  The stack have problem for die.  Try again...")
+                        logging.error(err)
                         print (err)
 
 
