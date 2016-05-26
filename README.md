@@ -1,5 +1,5 @@
 # Wall-e(In progress)
-![Alt text](walle.jpg?raw=true "WALL-E")
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Alt text](walle.jpg?raw=true "WALL-E")
 
 Tool for delete AWS objects... if it is not in the dustlist
 
@@ -13,7 +13,7 @@ aws_secret_access_key = ****************************************
 ```
 and launch:
 ```
-python "aws-name" "cloudformation"
+python -a aws-name -r cloudformation -d dust/cloudformation_dust
 ```
 This command will clean all cloudformations if there are not in "dust/cloudformation_dust"
 
