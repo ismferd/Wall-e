@@ -2,7 +2,7 @@
 import time
 import logging
 
-logger = logging.getLogger('wall_e')
+logger = logging.getLogger('Wall-e')
 
 
 class CleanerCloudFormation(object):

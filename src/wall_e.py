@@ -29,14 +29,10 @@ class WalleConfiguration(object):
 if __name__ == '__main__':
     logger = logging.getLogger('Wall-e')
     logger.setLevel(logging.DEBUG)
-    fh = logging.FileHandler('logs/wall-e.log')
-    fh.setLevel(logging.ERROR)
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
     ch.setFormatter(formatter)
-    logger.addHandler(fh)
     logger.addHandler(ch)
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
@@ -51,7 +47,9 @@ if __name__ == '__main__':
     connection = BotoConnections()
     walle = WalleConfiguration(connection)
     logger.info("Cleaning your ecosystem and saving plants")
-    #walle.clean_launchconfiguration(resource, account_name)
-    walle.clean_cloudformation(resource, account_name, dust)
+    if resource == 'cloudformation':
+        walle.clean_cloudformation(resource, account_name, dust)
+    if resource == 'autoscaling':
+        walle.clean_launchconfiguration(resource, account_name)
     logger.info("Finished, your {0} are clean".format(resource))
 
