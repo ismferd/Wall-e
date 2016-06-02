@@ -19,13 +19,13 @@ cd Wall-e/src/
 
 ###Cleaning CloudFormations:
 ```
-python -a your-aws-name -r cloudformation -d dust/cloudformation_dust
+python wall_e.py -a your-aws-name -r cloudformation -d dust/cloudformation_dust
 ```
 This command will clean all cloudformations if there are not in "dust/cloudformation_dust"
 
 ###Cleaning LaunchConfigurations:
 if you launch:
 ```
-python src/wall_e.py -r autoscaling -a your-aws-name
+python wall_e.py -r autoscaling -a your-aws-name
 ```
 This command clean all your launchConfigurations.
