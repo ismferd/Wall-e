@@ -11,6 +11,12 @@ cat ~/credentials
 aws_access_key_id = AKIA****************
 aws_secret_access_key = ****************************************
 ```
+
+###Enter into src directory
+```
+cd Wall-e/src/
+```
+
 ###Cleaning CloudFormations:
 ```
 python -a your-aws-name -r cloudformation -d dust/cloudformation_dust
