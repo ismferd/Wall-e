@@ -27,7 +27,7 @@ class CleanerCloudFormation(object):
             if stack not in cf_dust_not_clean:
                 try:
                     logger.info('throw trash... {}'.format(stack))
-                    #self.connection_cloudformation.delete_stack(stack)
+                    self.connection_cloudformation.delete_stack(stack)
                 except Exception as err:
                         logging.error(err)
                         print (err)
