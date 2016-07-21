@@ -31,7 +31,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
-    parser.add_argument('-d', '--dust', help='Dust file location', required=False)
+    parser.add_argument('-d', '--dust', help='cloudformation whitelist: you must write a file containing the list of '
+                                             'cloudformation names that will not be deleted', required=False)
     args = parser.parse_args()
     resource = args.resource
     account_name = args.aws_account
@@ -41,10 +42,12 @@ def main():
     connection = BotoConnections()
     walle = WalleConfiguration(connection)
     logger.info("Cleaning your ecosystem and saving plants")
+
     if resource == 'cloudformation':
         walle.clean_cloudformation(resource, account_name, dust)
     if resource == 'autoscaling':
         walle.clean_launchconfiguration(resource, account_name)
+
     logger.info("Finished, your {0} are clean".format(resource))
 
 
