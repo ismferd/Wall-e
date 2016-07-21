@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@author: Jose Armesto
+@author: IFM
 """
 from codecs import open
 from os import path
