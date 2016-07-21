@@ -2,6 +2,7 @@ from src.clean_launchconfiguration import CleanerLaunchConfiguration
 import mock
 import botocore
 
+
 class TestCleanLaunchConfiguration(object):
     @mock.patch('botocore.client.BaseClient._make_api_call')
     def test_get_all_launch_configurations_is_called(self, mock_connection):
