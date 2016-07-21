@@ -28,6 +28,7 @@ def main():
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     ch.setFormatter(formatter)
     logger.addHandler(ch)
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
@@ -49,7 +50,6 @@ def main():
         walle.clean_launchconfiguration(resource, account_name)
 
     logger.info("Finished, your {0} are clean".format(resource))
-
 
 if __name__ == '__main__':
     main()

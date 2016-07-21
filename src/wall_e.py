@@ -1,8 +1,6 @@
 #!/usr/bin/python
-import argparse
 from clean_cloudformation import CleanerCloudFormation
 from clean_launchconfiguration import CleanerLaunchConfiguration
-
 
 
 class WalleConfiguration(object):

@@ -1,5 +1,8 @@
 #!/usr/bin/python
 import botocore
+import logging
+
+logger = logging.getLogger('Wall-e')
 
 
 class CleanerLaunchConfiguration(object):
