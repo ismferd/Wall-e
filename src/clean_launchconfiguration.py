@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import botocore
 import logging
 

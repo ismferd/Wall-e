@@ -1,6 +1,10 @@
-#!/usr/bin/python
 from clean_cloudformation import CleanerCloudFormation
 from clean_launchconfiguration import CleanerLaunchConfiguration
+from clean_ec2_instances import CleanerEc2Instances
+import logging
+
+
+logger = logging.getLogger('Wall-e')
 
 
 class WalleConfiguration(object):
@@ -19,6 +23,10 @@ class WalleConfiguration(object):
     def clean_launchconfiguration(self, resource, account_name):
         launch_config = CleanerLaunchConfiguration(self.connection.get_client_connection_to_aws(resource, account_name))
         launch_config.cleaner_launch_config()
+
+    def clean_ec2_instances(self, resource, account_name, tag):
+        ec2 = CleanerEc2Instances(self.connection.get_resource_connection_to_aws(resource, account_name))
+        ec2.cleaner_ec2_instances_by_tag(tag)
 
     def save_plants(self, dust_file):
         return open(dust_file).read().splitlines()

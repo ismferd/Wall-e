@@ -7,6 +7,8 @@ Invocation flow:
   4. Simultaneously write to `stdout`
   5. Exit.
 """
+
+
 import argparse
 import logging
 from boto_connections import BotoConnections
@@ -31,13 +33,17 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
+    parser.add_argument('-t', '--tag', help='AWS Tag', required=False)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
     parser.add_argument('-d', '--dust', help='cloudformation whitelist: you must write a file containing the list of '
                                              'cloudformation names that will not be deleted', required=False)
+
     args = parser.parse_args()
     resource = args.resource
     account_name = args.aws_account
     dust = args.dust
+    tag = args.tag
+
     logger.info('Building a Wall-e bot...')
     logger.info('Wall-e are going to clean: {0} in account {1}'.format(resource, account_name))
     connection = BotoConnections()
@@ -48,6 +54,9 @@ def main():
         walle.clean_cloudformation(resource, account_name, dust)
     if resource == 'autoscaling':
         walle.clean_launchconfiguration(resource, account_name)
+    if resource == 'ec2':
+        walle.clean_ec2_instances(resource, account_name, tag)
+
 
     logger.info("Finished, your {0} are clean".format(resource))
 
