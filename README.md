@@ -1,7 +1,7 @@
 # Wall-e(In progress)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Alt text](walle.jpg?raw=true "WALL-E")
 
-Tool for delete AWS objects... if it is not in the dustlist
+Tool for clean AWS objects...
 ## Install
 ```
 pip install git+https://git@github.com/ismFerDev/Wall-e.git
@@ -46,4 +46,4 @@ and Run:
 python cli.py -r ec2 -t tag_name1 tag_name2 tag_name3 -a aws_account
 ```
 
-You will delete all insntace not tagged with tag_name1 tag_name2 tag_name3 
+You will delete all instance not tagged with tag_name1 tag_name2 tag_name3 
