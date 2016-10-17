@@ -33,7 +33,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
-    parser.add_argument('-t', '--tag', help='AWS Tag', required=False)
+    parser.add_argument('-t', '--tag', nargs='+', help='AWS Tag', required=False)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
     parser.add_argument('-d', '--dust', help='cloudformation whitelist: you must write a file containing the list of '
                                              'cloudformation names that will not be deleted', required=False)
