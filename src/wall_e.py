@@ -31,7 +31,7 @@ class WalleConfiguration(object):
         ec2.cleaner_ec2_instances_by_tag(tag)
 
     def clean_snapshots(self, resource, account_name, days):
-        snapshots = CleanerSnapshots(self.connection.get_resource_connection_to_aws(resource, account_name))
+        snapshots = CleanerSnapshots(self.connection.get_client_connection_to_aws(resource, account_name))
         snapshots.cleaner_snapshots_older_than(days)
 
     def save_plants(self, dust_file):

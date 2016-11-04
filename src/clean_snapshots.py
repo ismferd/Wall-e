@@ -10,10 +10,11 @@ class CleanerSnapshots(object):
         self.connection_snapshots = connection_snapshots
 
     def get_all_snapshots(self):
-        return self.connection_snapshots.describe_snapshots()['SnapshotIds']
+        print("lol")
+        return self.connection_snapshots.describe_snapshots()
 
-    def cleaner_snapshots(self):
-        snapshots = self.get_all_snapshots()
-
+    def cleaner_snapshots_older_than(self, days):
+        snapshots = self.get_all_snapshots()['Snapshots']
+        print("days:" + str(days))
         for snapshot in snapshots:
-           print snapshot
+           print(snapshot['SnapshotId']+" "+str(snapshot['StartTime']))

@@ -44,6 +44,7 @@ def main():
     account_name = args.aws_account
     dust = args.dust
     tag = args.tag
+    days = args.days
 
     logger.info('Building a Wall-e bot...')
     logger.info('Wall-e are going to clean: {0} in account {1}'.format(resource, account_name))
@@ -57,8 +58,8 @@ def main():
         walle.clean_launchconfiguration(resource, account_name)
     if resource == 'ec2':
         walle.clean_ec2_instances(resource, account_name, tag)
-    if resource == 'snapshot':
-        walle.clean_snapshots(resource, account_name, days)
+    if resource == 'snapshots':
+        walle.clean_snapshots('ec2', account_name, days)
 
 
     logger.info("Finished, your {0} are clean".format(resource))
