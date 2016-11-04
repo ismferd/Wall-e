@@ -34,6 +34,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
     parser.add_argument('-t', '--tag', nargs='+', help='AWS Tag', required=False)
+    parser.add_argument('-D', '--days', nargs='+', help='Days old to delete', required=False)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
     parser.add_argument('-d', '--dust', help='cloudformation whitelist: you must write a file containing the list of '
                                              'cloudformation names that will not be deleted', required=False)
@@ -56,6 +57,8 @@ def main():
         walle.clean_launchconfiguration(resource, account_name)
     if resource == 'ec2':
         walle.clean_ec2_instances(resource, account_name, tag)
+    if resource == 'snapshot':
+        walle.clean_snapshots(resource, account_name, days)
 
 
     logger.info("Finished, your {0} are clean".format(resource))
