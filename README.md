@@ -46,4 +46,15 @@ and Run:
 python cli.py -r ec2 -t tag_name1 tag_name2 tag_name3 -a aws_account
 ```
 
-You will delete all instance not tagged with tag_name1 tag_name2 tag_name3 
+You will delete all instance not tagged with tag_name1 tag_name2 tag_name3
+
+### Cleaning your snapshots:
+You must specify how many days you want to retain.
+
+and Run:
+
+```
+python wall-e.py -r snapshot -D days -a aws_account
+```
+
+You will delete all snapshots older than days
