@@ -1,15 +1,22 @@
-#from src.wall_e import WalleConfiguration
-#import mock
-#
-#
-#class TestWalleConfiguration(object):
-#     def test_clean_cloudformation_cleaner_stacks_is_called(self, tmpdir):
-#         mock_dust_file = tmpdir.mkdir("files").join("cloudformation")
-#         mock_dust_file.write('{0}\n{1}'.format('cloudformation', 'cloudformation2'))
-#         mock_connection = mock.Mock()
-#         walle_configuration = WalleConfiguration(str(mock_dust_file.realpath()), mock_connection)
-#         walle_configuration.cformation.cleaner_stacks = mock.Mock()
-#         walle_configuration.clean_cloudformation()
-#         walle_configuration.cformation.cleaner_stacks.called
-#
-#
+from src.wall_e import WalleConfiguration
+from src.clean_launchconfiguration import CleanerLaunchConfiguration
+from src.boto_connections import BotoConnections
+import mock
+
+
+class TestWalleConfiguration(object):
+    def test_clean_launch_configuration_cleaner_launch_config_called(self):
+        boto = mock.Mock(BotoConnections)
+        walle = WalleConfiguration(boto)
+        clc = CleanerLaunchConfiguration
+        clc.get_all_launch_configuration = mock.Mock()
+        clc.cleaner_launch_config = mock.Mock()
+        walle.clean_launchconfiguration('resource', 'account')
+        assert clc.cleaner_launch_config.called
+
+
+
+
+
+
+
