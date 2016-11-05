@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from datetime import timedelta
 
 logger = logging.getLogger('Wall-e')
 
@@ -20,19 +21,22 @@ class CleanerSnapshots(object):
             #result = self.connection_snapshots.delete_snapshot(SnapshotId = snapshotId)
             '''
         except:
-            print "muerte"
+            '''
+            check if we have to retry due to AWS throttling, fail otherwise
+            '''
+            print("muerte")
         else:
             return result
 
     def cleaner_snapshots_older_than(self, days):
         snapshots = self.get_all_snapshots()['Snapshots']
         print("days:" + str(days))
-        now = datetime.now(timezone=utc)
         for snapshot in snapshots:
-            print (now)
-            date = snapshot['StartTime']
-            print((now - date)
-            '''
-            If the snapshot date is greater than the number of days specified, delete it
-            # delete_snapshot(snapshot['SnapshotId']
-            '''
+            snapshot_date = snapshot['StartTime']
+            tz_info = snapshot_date.tzinfo
+            if (datetime.now(tz_info)) > (snapshot_date + timedelta(days=int(days[0]))):
+                print("delete! - " + snapshot['SnapshotId'] + " - " + str(snapshot_date))
+                '''
+                If the snapshot date is greater than the number of days specified, delete it
+                # delete_snapshot(snapshot['SnapshotId']
+                '''
