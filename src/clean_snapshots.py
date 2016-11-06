@@ -16,7 +16,7 @@ class CleanerSnapshots(object):
 
     def delete_snapshot(self, snapshotId):
         try:
-            print("deleting snapshot "+snapshotId)
+            logger.info('Deleting snapshot: {0}'.format(snapshotId))
             '''
             #result = self.connection_snapshots.delete_snapshot(SnapshotId = snapshotId)
             '''
@@ -30,12 +30,12 @@ class CleanerSnapshots(object):
 
     def cleaner_snapshots_older_than(self, days):
         snapshots = self.get_all_snapshots()['Snapshots']
-        print("days:" + str(days))
+        logger.info('Maintaining only snapshots newer than {0} days'.format(str(days)))
         for snapshot in snapshots:
             snapshot_date = snapshot['StartTime']
             tz_info = snapshot_date.tzinfo
             if (datetime.now(tz_info)) > (snapshot_date + timedelta(days=int(days[0]))):
-                print("delete! - " + snapshot['SnapshotId'] + " - " + str(snapshot_date))
+                logger.info('Deleting snapshot {0} creation date {1}'.format(snapshot['SnapshotId'],snapshot_date))
                 '''
                 If the snapshot date is greater than the number of days specified, delete it
                 # delete_snapshot(snapshot['SnapshotId']
