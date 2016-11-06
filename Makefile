@@ -3,7 +3,7 @@ MY_CURR_DIR=$(shell pwd)
 MY_PYTHON_PATH=$(shell echo ${PYTHONPATH})
 PIP=pip
 install-develop: clean
-      (PIP) install -e $(MY_CURR_DIR)
+                 (PIP) install -e $(MY_CURR_DIR)
 
 install-user: clean
       python setup.py install --user
