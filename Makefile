@@ -19,7 +19,7 @@ uninstall:
 	$(PIP) uninstall $(PROJECT)
 
 test: clean
-	export PYTHONPATH=$(MY_PYTHON_PATH):$(MY_CURR_DIR)/src; py.test -vv --cache-clear
+	export PYTHONPATH=$(MY_PYTHON_PATH):$(MY_CURR_DIR)/src; py.test -vv
 
 clean:
 	rm -rf build dist $(PROJECT).egg-info docs-api tmp .cache
