@@ -1,10 +1,10 @@
-from clean_cloudformation import CleanerCloudFormation
-from clean_launchconfiguration import CleanerLaunchConfiguration
-from clean_ec2_instances import CleanerEc2Instances
-from clean_snapshots import CleanerSnapshots
-
 import logging
 
+from clean_cloudformation import CleanerCloudFormation
+from clean_ec2_instances import CleanerEc2Instances
+from clean_launchconfiguration import CleanerLaunchConfiguration
+from clean_snapshots import CleanerSnapshots
+from get_sts import StsInfo
 
 logger = logging.getLogger('Wall-e')
 
@@ -33,6 +33,10 @@ class WalleConfiguration(object):
     def clean_snapshots(self, resource, account_name, days):
         snapshots = CleanerSnapshots(self.connection.get_client_connection_to_aws(resource, account_name))
         snapshots.cleaner_snapshots_older_than(days)
+
+    def get_sts_info(self, resource, account_name):
+        sts_info = StsInfo(self.connection.get_client_connection_to_aws(resource, account_name))
+        sts_info.get_sts_info()
 
     def save_plants(self, dust_file):
         return open(dust_file).read().splitlines()

@@ -10,7 +10,6 @@ Invocation flow:
 
 
 import argparse
-import logging
 from boto_connections import BotoConnections
 import logging
 from wall_e import WalleConfiguration
@@ -51,6 +50,9 @@ def main():
     connection = BotoConnections()
     walle = WalleConfiguration(connection)
     logger.info("Cleaning your ecosystem and saving plants")
+
+    sts_info = walle.get_sts_info('sts', account_name)
+    print(sts_info)
 
     if resource == 'cloudformation':
         walle.clean_cloudformation(resource, account_name, dust)
