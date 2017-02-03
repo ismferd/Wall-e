@@ -10,7 +10,6 @@ Invocation flow:
 
 
 import argparse
-import logging
 from boto_connections import BotoConnections
 import logging
 from wall_e import WalleConfiguration
@@ -34,6 +33,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--resource', help='AWS Resource', required=True)
     parser.add_argument('-t', '--tag', nargs='+', help='AWS Tag', required=False)
+    parser.add_argument('-D', '--days', nargs='+', help='Days old to delete', required=False)
     parser.add_argument('-a', '--aws_account', help='AWS account name', required=True)
     parser.add_argument('-d', '--dust', help='cloudformation whitelist: you must write a file containing the list of '
                                              'cloudformation names that will not be deleted', required=False)
@@ -43,6 +43,7 @@ def main():
     account_name = args.aws_account
     dust = args.dust
     tag = args.tag
+    days = args.days
 
     logger.info('Building a Wall-e bot...')
     logger.info('Wall-e are going to clean: {0} in account {1}'.format(resource, account_name))
@@ -50,12 +51,17 @@ def main():
     walle = WalleConfiguration(connection)
     logger.info("Cleaning your ecosystem and saving plants")
 
+    sts_info = walle.get_sts_info('sts', account_name)
+    print(sts_info)
+
     if resource == 'cloudformation':
         walle.clean_cloudformation(resource, account_name, dust)
     if resource == 'autoscaling':
         walle.clean_launchconfiguration(resource, account_name)
     if resource == 'ec2':
         walle.clean_ec2_instances(resource, account_name, tag)
+    if resource == 'snapshots':
+        walle.clean_snapshots('ec2', account_name, days)
 
 
     logger.info("Finished, your {0} are clean".format(resource))
